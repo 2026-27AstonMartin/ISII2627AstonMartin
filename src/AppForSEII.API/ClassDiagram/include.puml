@@ -5,4 +5,5 @@
 !include .\\ApplicationUser.puml
 !include .\\Pista.puml
 !include .\\Competicion.puml
+!include .\\Material.puml
 @enduml
