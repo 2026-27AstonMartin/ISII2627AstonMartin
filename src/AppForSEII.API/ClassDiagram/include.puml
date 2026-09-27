@@ -2,4 +2,7 @@
 !include .\\.\Models\ApplicationUser.puml
 !include .\\.\Models\InscripcionCompeticion.puml
 !include .\\.\Models\MetodoPago.puml
+!include .\\ApplicationUser.puml
+!include .\\Pista.puml
+!include .\\Competicion.puml
 @enduml

@@ -1,0 +1,10 @@
+@startuml
+class Competicion {
+    + Id : int <<get>> <<set>>
+    + Nombre : string <<get>> <<set>>
+    + Plazas : int <<get>> <<set>>
+    + Lugar : string <<get>> <<set>>
+    + Precio : decimal <<get>> <<set>>
+}
+Competicion --> "Fecha" DateTime
+@enduml

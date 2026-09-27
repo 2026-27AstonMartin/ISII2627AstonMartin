@@ -2,4 +2,5 @@
 hide methods
 !include Models/InscripcionCompeticion.puml
 !include Models/MetodoPago.puml
+!include Competicion.puml
 @enduml
