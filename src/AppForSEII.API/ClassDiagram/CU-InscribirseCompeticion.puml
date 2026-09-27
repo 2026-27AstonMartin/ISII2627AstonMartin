@@ -1,0 +1,5 @@
+@startuml
+hide methods
+!include Models/InscripcionCompeticion.puml
+!include Models/MetodoPago.puml
+@enduml
