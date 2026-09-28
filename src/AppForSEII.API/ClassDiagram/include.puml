@@ -1,6 +1,6 @@
 @startuml
 !include .\\.\Models\ApplicationUser.puml
-!include .\\.\Models\InscripcionCompeticion.puml
+!include .\\.\Models\Inscripcion.puml
 !include .\\.\Models\MetodoPago.puml
 !include .\\ApplicationUser.puml
 !include .\\Pista.puml
