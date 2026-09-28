@@ -20,5 +20,7 @@ namespace AppForSEII.API.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
 
+        public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
+
     }
 }
