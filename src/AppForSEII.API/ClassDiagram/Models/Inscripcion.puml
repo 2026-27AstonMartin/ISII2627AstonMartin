@@ -6,6 +6,7 @@ class Inscripcion {
     + <<required>> DNI : string <<get>> <<set>>
     + <<required>> Telefono : string <<get>> <<set>>
     + PrecioTotal : decimal <<get>> <<set>>
+    + CompeticionesInscritas : IList<CompeticionInscrita> <<get>> <<set>>
 }
 Inscripcion --> "FechaInscripcion" DateTime
 Inscripcion --> "MetodoPago" MetodoPago

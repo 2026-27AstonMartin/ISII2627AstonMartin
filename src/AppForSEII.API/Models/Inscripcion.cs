@@ -36,4 +36,6 @@ public class Inscripcion
     [DataType(DataType.Currency)]
     [Precision(10, 2)]
     public decimal PrecioTotal { get; set; }
+
+    public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
 }
