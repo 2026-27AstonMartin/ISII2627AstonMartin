@@ -22,4 +22,6 @@ public class ApplicationUser : IdentityUser
 
     [StringLength(50)]
     public string? Surname {get;set;}
+
+    public IList<InscripcionCompeticion> Inscripciones { get; set; } = new List<InscripcionCompeticion>();
 }
