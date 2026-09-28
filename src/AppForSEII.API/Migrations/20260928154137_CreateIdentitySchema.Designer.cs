@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppForSEII.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260928144136_CreateIdentitySchema")]
+    [Migration("20260928154137_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         /// <inheritdoc />
@@ -130,7 +130,26 @@ namespace AppForSEII.API.Migrations
                     b.ToTable("Competiciones");
                 });
 
-            modelBuilder.Entity("AppForSEII.API.Models.InscripcionCompeticion", b =>
+            modelBuilder.Entity("AppForSEII.API.Models.CompeticionInscrita", b =>
+                {
+                    b.Property<int>("CompeticionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InscripcionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProblemasFisicos")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("CompeticionId", "InscripcionId");
+
+                    b.HasIndex("InscripcionId");
+
+                    b.ToTable("CompeticionesInscritas");
+                });
+
+            modelBuilder.Entity("AppForSEII.API.Models.Inscripcion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -142,9 +161,6 @@ namespace AppForSEII.API.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("CompeticionId")
-                        .HasColumnType("int");
 
                     b.Property<string>("DNI")
                         .IsRequired()
@@ -171,16 +187,9 @@ namespace AppForSEII.API.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CompeticionId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("InscripcionesCompeticion");
+                    b.ToTable("Inscripciones");
                 });
 
             modelBuilder.Entity("AppForSEII.API.Models.Material", b =>
@@ -369,21 +378,23 @@ namespace AppForSEII.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AppForSEII.API.Models.InscripcionCompeticion", b =>
+            modelBuilder.Entity("AppForSEII.API.Models.CompeticionInscrita", b =>
                 {
                     b.HasOne("AppForSEII.API.Models.Competicion", "Competicion")
-                        .WithMany("Inscripciones")
+                        .WithMany("CompeticionesInscritas")
                         .HasForeignKey("CompeticionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AppForSEII.API.Models.ApplicationUser", "Usuario")
-                        .WithMany("Inscripciones")
-                        .HasForeignKey("UsuarioId");
+                    b.HasOne("AppForSEII.API.Models.Inscripcion", "Inscripcion")
+                        .WithMany("CompeticionesInscritas")
+                        .HasForeignKey("InscripcionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Competicion");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Inscripcion");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -437,14 +448,14 @@ namespace AppForSEII.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AppForSEII.API.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Inscripciones");
-                });
-
             modelBuilder.Entity("AppForSEII.API.Models.Competicion", b =>
                 {
-                    b.Navigation("Inscripciones");
+                    b.Navigation("CompeticionesInscritas");
+                });
+
+            modelBuilder.Entity("AppForSEII.API.Models.Inscripcion", b =>
+                {
+                    b.Navigation("CompeticionesInscritas");
                 });
 #pragma warning restore 612, 618
         }

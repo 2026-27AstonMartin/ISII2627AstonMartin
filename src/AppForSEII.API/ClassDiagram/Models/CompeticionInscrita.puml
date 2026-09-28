@@ -1,0 +1,9 @@
+@startuml
+class CompeticionInscrita {
+    + CompeticionId : int <<get>> <<set>>
+    + InscripcionId : int <<get>> <<set>>
+    + ProblemasFisicos : string? <<get>> <<set>>
+}
+Competicion "1" --> "*" CompeticionInscrita : CompeticionesInscritas
+Inscripcion "1" --> "*" CompeticionInscrita : CompeticionesInscritas
+@enduml

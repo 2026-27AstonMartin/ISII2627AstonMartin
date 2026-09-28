@@ -2,7 +2,7 @@ using DataType = System.ComponentModel.DataAnnotations.DataType;
 
 namespace AppForSEII.API.Models;
 
-public class InscripcionCompeticion
+public class Inscripcion
 {
     [Key]
     public int Id { get; set; }
@@ -37,13 +37,5 @@ public class InscripcionCompeticion
     [Precision(10, 2)]
     public decimal PrecioTotal { get; set; }
 
-    // Relacion 1 a N con Competicion: una inscripcion pertenece siempre a una competicion
-    public int CompeticionId { get; set; }
-
-    public Competicion Competicion { get; set; } = null!;
-
-    // Relacion 0..1 a N con ApplicationUser: la inscripcion puede hacerse sin usuario registrado
-    public string? UsuarioId { get; set; }
-
-    public ApplicationUser? Usuario { get; set; }
+    public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
 }

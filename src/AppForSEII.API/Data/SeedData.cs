@@ -41,10 +41,17 @@ namespace AppForSEII.API.Data {
             }
 
             try {
-                SeedInscripcionesCompeticion(dbContext);
+                SeedInscripciones(dbContext);
             }
             catch (Exception ex) {
-                logger.LogError(ex, "An error occurred seeding the InscripcionesCompeticion in the Database.");
+                logger.LogError(ex, "An error occurred seeding the Inscripciones in the Database.");
+            }
+
+            try {
+                SeedCompeticionesInscritas(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the CompeticionesInscritas in the Database.");
             }
 
         }
@@ -120,37 +127,57 @@ namespace AppForSEII.API.Data {
             dbContext.SaveChanges();
         }
 
-        public static void SeedInscripcionesCompeticion(ApplicationDbContext dbContext) {
-            if (dbContext.InscripcionesCompeticion.Any())
+        public static void SeedInscripciones(ApplicationDbContext dbContext) {
+            if (dbContext.Inscripciones.Any())
                 return;
 
-            //the competitions must already exist to be able to relate the inscriptions to them
-            var competicion = dbContext.Competiciones.FirstOrDefault();
-            if (competicion == null)
-                return;
-
-            dbContext.InscripcionesCompeticion.AddRange(
-                new InscripcionCompeticion {
+            dbContext.Inscripciones.AddRange(
+                new Inscripcion {
                     NombreUsuario = "Peter",
                     ApellidosUsuario = "Jackson",
                     DNI = "12345678Z",
                     Telefono = "600123456",
                     FechaInscripcion = new DateTime(2026, 9, 28),
                     MetodoPago = MetodoPago.Tarjeta,
-                    PrecioTotal = competicion.Precio,
-                    CompeticionId = competicion.Id,
-                    UsuarioId = "3"
+                    PrecioTotal = 25.00m
                 },
-                new InscripcionCompeticion {
+                new Inscripcion {
                     NombreUsuario = "Elena",
                     ApellidosUsuario = "Navarro Martinez",
                     DNI = "87654321B",
                     Telefono = "600654321",
                     FechaInscripcion = new DateTime(2026, 9, 28),
                     MetodoPago = MetodoPago.Bizum,
-                    PrecioTotal = competicion.Precio,
-                    CompeticionId = competicion.Id,
-                    UsuarioId = "1"
+                    PrecioTotal = 58.50m
+                });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void SeedCompeticionesInscritas(ApplicationDbContext dbContext) {
+            if (dbContext.CompeticionesInscritas.Any())
+                return;
+
+            //las competiciones y las inscripciones deben existir para poder relacionarlas
+            var competiciones = dbContext.Competiciones.OrderBy(c => c.Id).ToList();
+            var inscripciones = dbContext.Inscripciones.OrderBy(i => i.Id).ToList();
+            if (competiciones.Count < 2 || inscripciones.Count < 2)
+                return;
+
+            dbContext.CompeticionesInscritas.AddRange(
+                new CompeticionInscrita {
+                    CompeticionId = competiciones[0].Id,
+                    InscripcionId = inscripciones[0].Id,
+                    ProblemasFisicos = "Molestias en el hombro derecho"
+                },
+                new CompeticionInscrita {
+                    CompeticionId = competiciones[0].Id,
+                    InscripcionId = inscripciones[1].Id
+                },
+                new CompeticionInscrita {
+                    CompeticionId = competiciones[1].Id,
+                    InscripcionId = inscripciones[1].Id,
+                    ProblemasFisicos = "Operada de rodilla hace un ano"
                 });
 
             dbContext.SaveChanges();
