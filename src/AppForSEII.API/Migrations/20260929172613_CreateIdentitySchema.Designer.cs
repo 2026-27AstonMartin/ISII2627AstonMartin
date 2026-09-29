@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppForSEII.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260928154137_CreateIdentitySchema")]
+    [Migration("20260929172613_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         /// <inheritdoc />
@@ -162,10 +162,19 @@ namespace AppForSEII.API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("DNI")
                         .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("DatosPago")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("FechaInscripcion")
                         .HasColumnType("datetime2");
@@ -188,6 +197,8 @@ namespace AppForSEII.API.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Inscripciones");
                 });
@@ -395,6 +406,17 @@ namespace AppForSEII.API.Migrations
                     b.Navigation("Competicion");
 
                     b.Navigation("Inscripcion");
+                });
+
+            modelBuilder.Entity("AppForSEII.API.Models.Inscripcion", b =>
+                {
+                    b.HasOne("AppForSEII.API.Models.ApplicationUser", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

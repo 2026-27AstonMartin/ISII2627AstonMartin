@@ -37,5 +37,14 @@ public class Inscripcion
     [Precision(10, 2)]
     public decimal PrecioTotal { get; set; }
 
+    [Required]
+    [StringLength(100, MinimumLength = 4, ErrorMessage = "Los datos del pago deben tener entre 4 y 100 caracteres.")]
+    public required string DatosPago { get; set; }
+
+    //el cliente debe estar conectado para iniciar el caso de uso
+    public required string ClienteId { get; set; }
+
+    public ApplicationUser Cliente { get; set; } = null!;
+
     public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
 }

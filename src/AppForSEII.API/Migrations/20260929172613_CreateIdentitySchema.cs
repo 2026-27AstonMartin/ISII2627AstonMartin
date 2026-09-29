@@ -70,25 +70,6 @@ namespace AppForSEII.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inscripciones",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ApellidosUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DNI = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    FechaInscripcion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MetodoPago = table.Column<int>(type: "int", nullable: false),
-                    PrecioTotal = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inscripciones", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Materiales",
                 columns: table => new
                 {
@@ -226,6 +207,33 @@ namespace AppForSEII.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inscripciones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ApellidosUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DNI = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    FechaInscripcion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MetodoPago = table.Column<int>(type: "int", nullable: false),
+                    PrecioTotal = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    DatosPago = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ClienteId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inscripciones", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inscripciones_AspNetUsers_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CompeticionesInscritas",
                 columns: table => new
                 {
@@ -293,6 +301,11 @@ namespace AppForSEII.API.Migrations
                 name: "IX_CompeticionesInscritas_InscripcionId",
                 table: "CompeticionesInscritas",
                 column: "InscripcionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inscripciones_ClienteId",
+                table: "Inscripciones",
+                column: "ClienteId");
         }
 
         /// <inheritdoc />
@@ -326,13 +339,13 @@ namespace AppForSEII.API.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Competiciones");
 
             migrationBuilder.DropTable(
                 name: "Inscripciones");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

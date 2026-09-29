@@ -6,8 +6,11 @@ class Inscripcion {
     + <<required>> DNI : string <<get>> <<set>>
     + <<required>> Telefono : string <<get>> <<set>>
     + PrecioTotal : decimal <<get>> <<set>>
+    + <<required>> DatosPago : string <<get>> <<set>>
+    + <<required>> ClienteId : string <<get>> <<set>>
     + CompeticionesInscritas : IList<CompeticionInscrita> <<get>> <<set>>
 }
 Inscripcion --> "FechaInscripcion" DateTime
 Inscripcion --> "MetodoPago" MetodoPago
+Inscripcion --> "Cliente" ApplicationUser
 @enduml

@@ -139,7 +139,9 @@ namespace AppForSEII.API.Data {
                     Telefono = "600123456",
                     FechaInscripcion = new DateTime(2026, 9, 28),
                     MetodoPago = MetodoPago.Tarjeta,
-                    PrecioTotal = 25.00m
+                    PrecioTotal = 25.00m,
+                    DatosPago = "4539 1488 0343 6467",
+                    ClienteId = "3"
                 },
                 new Inscripcion {
                     NombreUsuario = "Elena",
@@ -148,7 +150,9 @@ namespace AppForSEII.API.Data {
                     Telefono = "600654321",
                     FechaInscripcion = new DateTime(2026, 9, 28),
                     MetodoPago = MetodoPago.Bizum,
-                    PrecioTotal = 58.50m
+                    PrecioTotal = 58.50m,
+                    DatosPago = "600654321",
+                    ClienteId = "1"
                 });
 
             dbContext.SaveChanges();
