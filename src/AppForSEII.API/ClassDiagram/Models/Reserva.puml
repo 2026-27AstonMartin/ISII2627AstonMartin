@@ -6,6 +6,9 @@ class Reserva {
     + Dni : string <<get>> <<set>>
     + PrecioTotal : decimal <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
 Reserva --> "FechaReserva" DateTime
 Reserva --> "MetodoPago" MetodoPago
+Reserva o-> "PistasReservadas<PistaReservada>" "IList`1"
 @enduml
