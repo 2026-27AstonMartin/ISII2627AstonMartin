@@ -1,0 +1,12 @@
+@startuml
+class ClaseInscrita {
+    + Id : int <<get>> <<set>>
+    + PlazasReservadas : int <<get>> <<set>>
+    + Precio : decimal <<get>> <<set>>
+    + Observaciones : string? <<get>> <<set>>
+    + ClaseDeportivaId : int <<get>> <<set>>
+    + InscripcionId : int <<get>> <<set>>
+}
+ClaseInscrita o-> "ClaseDeportiva" ClaseDeportiva
+ClaseInscrita o-> "Inscripcion" Inscripcion
+@enduml
