@@ -1,0 +1,9 @@
+@startuml
+class Pista {
+    + Id : int <<get>> <<set>>
+    + Nombre : string <<get>> <<set>>
+    + Aforo : int <<get>> <<set>>
+    + TipoDeporte : string <<get>> <<set>>
+    + PrecioPorDia : decimal <<get>> <<set>>
+}
+@enduml
