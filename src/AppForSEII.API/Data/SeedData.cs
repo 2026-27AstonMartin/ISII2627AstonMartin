@@ -86,22 +86,25 @@ namespace AppForSEII.API.Data {
 
             dbContext.Pistas.AddRange(
                 new Pista {
-                    Nombre = "Pista de Padel 1",
-                    Aforo = 4,
-                    TipoDeporte = "Padel",
-                    PrecioPorDia = 20.00m
+                    NombrePista = "Pista de Padel 1",
+                    NPersonas = 4,
+                    TipoDeporte = new TipoDeporte { Nombre = "Padel" },
+                    Precio = 20.00m,
+                    Stock = 1
                 },
                 new Pista {
-                    Nombre = "Pista de Tenis 1",
-                    Aforo = 4,
-                    TipoDeporte = "Tenis",
-                    PrecioPorDia = 24.00m
+                    NombrePista = "Pista de Tenis 1",
+                    NPersonas = 4,
+                    TipoDeporte = new TipoDeporte { Nombre = "Tenis" },
+                    Precio = 24.00m,
+                    Stock = 1
                 },
                 new Pista {
-                    Nombre = "Pista Central de Baloncesto",
-                    Aforo = 20,
-                    TipoDeporte = "Baloncesto",
-                    PrecioPorDia = 55.00m
+                    NombrePista = "Pista Central de Baloncesto",
+                    NPersonas = 20,
+                    TipoDeporte = new TipoDeporte { Nombre = "Baloncesto" },
+                    Precio = 55.00m,
+                    Stock = 1
                 });
 
             dbContext.SaveChanges();
