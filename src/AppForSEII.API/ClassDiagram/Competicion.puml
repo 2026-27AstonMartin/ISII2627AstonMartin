@@ -5,7 +5,6 @@ class Competicion {
     + Plazas : int <<get>> <<set>>
     + Lugar : string <<get>> <<set>>
     + Precio : decimal <<get>> <<set>>
-    + Inscripciones : IList<InscripcionCompeticion> <<get>> <<set>>
 }
 Competicion --> "Fecha" DateTime
 @enduml

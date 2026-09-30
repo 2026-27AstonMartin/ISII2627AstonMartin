@@ -70,6 +70,25 @@ namespace AppForSEII.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InscripcionesCompeticion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ApellidosUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DNI = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    FechaInscripcion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MetodoPago = table.Column<int>(type: "int", nullable: false),
+                    PrecioTotal = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InscripcionesCompeticion", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Materiales",
                 columns: table => new
                 {
@@ -206,38 +225,6 @@ namespace AppForSEII.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "InscripcionesCompeticion",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreUsuario = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ApellidosUsuario = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DNI = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    FechaInscripcion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MetodoPago = table.Column<int>(type: "int", nullable: false),
-                    PrecioTotal = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    CompeticionId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InscripcionesCompeticion", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InscripcionesCompeticion_AspNetUsers_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_InscripcionesCompeticion_Competiciones_CompeticionId",
-                        column: x => x.CompeticionId,
-                        principalTable: "Competiciones",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -276,16 +263,6 @@ namespace AppForSEII.API.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InscripcionesCompeticion_CompeticionId",
-                table: "InscripcionesCompeticion",
-                column: "CompeticionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InscripcionesCompeticion_UsuarioId",
-                table: "InscripcionesCompeticion",
-                column: "UsuarioId");
         }
 
         /// <inheritdoc />
@@ -307,6 +284,9 @@ namespace AppForSEII.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Competiciones");
+
+            migrationBuilder.DropTable(
                 name: "InscripcionesCompeticion");
 
             migrationBuilder.DropTable(
@@ -320,9 +300,6 @@ namespace AppForSEII.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Competiciones");
         }
     }
 }
