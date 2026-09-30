@@ -1,9 +1,9 @@
 @startuml
 !include .\\.\Models\ApplicationUser.puml
+!include .\\.\Models\Competicion.puml
 !include .\\.\Models\InscripcionCompeticion.puml
+!include .\\.\Models\Material.puml
 !include .\\.\Models\MetodoPago.puml
-!include .\\ApplicationUser.puml
-!include .\\Pista.puml
-!include .\\Competicion.puml
-!include .\\Material.puml
+!include .\\.\Models\Pista.puml
+!include .\\.\Models\TipoDeporte.puml
 @enduml
