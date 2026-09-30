@@ -19,5 +19,7 @@ public class Pista
     public int Stock { get; set; }
 
     public int TipoDeporteId { get; set; }
+
+    [ForeignKey("TipoDeporteId")]
     public TipoDeporte TipoDeporte { get; set; } = null!;
 }
