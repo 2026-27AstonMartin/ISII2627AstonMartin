@@ -140,9 +140,6 @@ namespace AppForSEII.API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("CompeticionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DNI")
                         .IsRequired()
                         .HasMaxLength(9)
@@ -168,14 +165,7 @@ namespace AppForSEII.API.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CompeticionId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("InscripcionesCompeticion");
                 });
@@ -366,23 +356,6 @@ namespace AppForSEII.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AppForSEII.API.Models.InscripcionCompeticion", b =>
-                {
-                    b.HasOne("AppForSEII.API.Models.Competicion", "Competicion")
-                        .WithMany("Inscripciones")
-                        .HasForeignKey("CompeticionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AppForSEII.API.Models.ApplicationUser", "Usuario")
-                        .WithMany("Inscripciones")
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Competicion");
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -432,16 +405,6 @@ namespace AppForSEII.API.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AppForSEII.API.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Inscripciones");
-                });
-
-            modelBuilder.Entity("AppForSEII.API.Models.Competicion", b =>
-                {
-                    b.Navigation("Inscripciones");
                 });
 #pragma warning restore 612, 618
         }

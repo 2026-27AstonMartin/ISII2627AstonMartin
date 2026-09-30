@@ -6,11 +6,7 @@ class InscripcionCompeticion {
     + <<required>> DNI : string <<get>> <<set>>
     + <<required>> Telefono : string <<get>> <<set>>
     + PrecioTotal : decimal <<get>> <<set>>
-    + CompeticionId : int <<get>> <<set>>
-    + UsuarioId : string? <<get>> <<set>>
 }
 InscripcionCompeticion --> "FechaInscripcion" DateTime
 InscripcionCompeticion --> "MetodoPago" MetodoPago
-Competicion "1" --> "*" InscripcionCompeticion : Inscripciones
-ApplicationUser "0..1" --> "*" InscripcionCompeticion : Inscripciones
 @enduml

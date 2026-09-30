@@ -124,11 +124,6 @@ namespace AppForSEII.API.Data {
             if (dbContext.InscripcionesCompeticion.Any())
                 return;
 
-            //the competitions must already exist to be able to relate the inscriptions to them
-            var competicion = dbContext.Competiciones.FirstOrDefault();
-            if (competicion == null)
-                return;
-
             dbContext.InscripcionesCompeticion.AddRange(
                 new InscripcionCompeticion {
                     NombreUsuario = "Peter",
@@ -137,9 +132,7 @@ namespace AppForSEII.API.Data {
                     Telefono = "600123456",
                     FechaInscripcion = new DateTime(2026, 9, 28),
                     MetodoPago = MetodoPago.Tarjeta,
-                    PrecioTotal = competicion.Precio,
-                    CompeticionId = competicion.Id,
-                    UsuarioId = "3"
+                    PrecioTotal = 25.00m
                 },
                 new InscripcionCompeticion {
                     NombreUsuario = "Elena",
@@ -148,9 +141,7 @@ namespace AppForSEII.API.Data {
                     Telefono = "600654321",
                     FechaInscripcion = new DateTime(2026, 9, 28),
                     MetodoPago = MetodoPago.Bizum,
-                    PrecioTotal = competicion.Precio,
-                    CompeticionId = competicion.Id,
-                    UsuarioId = "1"
+                    PrecioTotal = 18.50m
                 });
 
             dbContext.SaveChanges();
