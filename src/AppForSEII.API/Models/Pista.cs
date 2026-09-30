@@ -3,18 +3,23 @@ namespace AppForSEII.API.Models;
 public class Pista
 {
     [Key]
-    public int Id { get; set; }
+    public int IdPista { get; set; }
 
     [Required, StringLength(50)]
-    public string Nombre { get; set; } = string.Empty;
+    public string NombrePista { get; set; } = string.Empty;
 
     [Required]
-    public int Aforo { get; set; }
-
-    [Required, StringLength(30)]
-    public string TipoDeporte { get; set; } = string.Empty;
+    public int NPersonas { get; set; }
 
     [Required]
     [Column(TypeName = "decimal(10,2)")]
-    public decimal PrecioPorDia { get; set; }
+    public decimal Precio { get; set; }
+
+    [Required]
+    public int Stock { get; set; }
+
+    public int TipoDeporteId { get; set; }
+
+    [ForeignKey("TipoDeporteId")]
+    public TipoDeporte TipoDeporte { get; set; } = null!;
 }
