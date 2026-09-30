@@ -5,4 +5,5 @@
 !include .\\.\Models\Material.puml
 !include .\\.\Models\MetodoPago.puml
 !include .\\.\Models\Pista.puml
+!include .\\.\Models\TipoDeporte.puml
 @enduml
