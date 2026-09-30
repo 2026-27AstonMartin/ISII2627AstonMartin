@@ -3,4 +3,6 @@ hide methods
 !include Models/ApplicationUser.puml
 !include Models/TipoDeporte.puml
 !include Models/ClaseDeportiva.puml
+!include Models/Inscripcion.puml
+!include Models/MetodoPago.puml
 @enduml
