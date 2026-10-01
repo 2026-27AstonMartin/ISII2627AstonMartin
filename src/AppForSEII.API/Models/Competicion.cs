@@ -20,9 +20,11 @@ namespace AppForSEII.API.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Precio { get; set; }
 
-        public int TipoDeporteId { get; set; }
+          public int TipoDeporteId { get; set; }
 
+        [ForeignKey("TipoDeporteId")]
         public TipoDeporte TipoDeporte { get; set; } = null!;
+
 
         public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
     }
