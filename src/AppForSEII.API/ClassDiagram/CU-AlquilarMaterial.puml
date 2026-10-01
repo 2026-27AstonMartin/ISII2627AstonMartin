@@ -1,4 +1,6 @@
 @startuml
 hide methods
-!include Material.puml
+!include Models/Material.puml
+!include Models/TipoMaterial.puml
+!include Models/TipoDeporte.puml
 @enduml
