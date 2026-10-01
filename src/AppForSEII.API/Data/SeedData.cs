@@ -63,13 +63,6 @@ namespace AppForSEII.API.Data {
                 logger.LogError(ex, "An error occurred seeding the Alquileres in the Database.");
             }
 
-            try {
-                SeedInscripcionesCompeticion(dbContext);
-            }
-            catch (Exception ex) {
-                logger.LogError(ex, "An error occurred seeding the InscripcionesCompeticion in the Database.");
-            }
-
             //el orden importa: cada tabla necesita que esten sembradas aquellas a las que apunta
             try {
                 SeedTiposDeporte(dbContext);
@@ -280,33 +273,6 @@ namespace AppForSEII.API.Data {
                     FechaAlquiler = new DateTime(2026, 10, 7),
                     MetodoPago = MetodoPago.Efectivo,
                     PrecioTotal = 10.75m
-                });
-
-            dbContext.SaveChanges();
-        }
-
-        public static void SeedInscripcionesCompeticion(ApplicationDbContext dbContext) {
-            if (dbContext.InscripcionesCompeticion.Any())
-                return;
-
-            dbContext.InscripcionesCompeticion.AddRange(
-                new InscripcionCompeticion {
-                    NombreUsuario = "Peter",
-                    ApellidosUsuario = "Jackson",
-                    DNI = "12345678Z",
-                    Telefono = "600123456",
-                    FechaInscripcion = new DateTime(2026, 9, 28),
-                    MetodoPago = MetodoPago.Tarjeta,
-                    PrecioTotal = 25.00m
-                },
-                new InscripcionCompeticion {
-                    NombreUsuario = "Elena",
-                    ApellidosUsuario = "Navarro Martinez",
-                    DNI = "87654321B",
-                    Telefono = "600654321",
-                    FechaInscripcion = new DateTime(2026, 9, 28),
-                    MetodoPago = MetodoPago.Bizum,
-                    PrecioTotal = 18.50m
                 });
 
             dbContext.SaveChanges();
