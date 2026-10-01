@@ -23,5 +23,7 @@ namespace AppForSEII.API.Models
         public int TipoDeporteId { get; set; }
 
         public TipoDeporte TipoDeporte { get; set; } = null!;
+
+        public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
     }
 }
