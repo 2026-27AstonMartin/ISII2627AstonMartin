@@ -5,7 +5,10 @@ class Inscripcion {
     + PrecioTotal : decimal <<get>> <<set>>
     + ClienteId : string <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
 Inscripcion --> "FechaInscripcion" DateTime
 Inscripcion --> "MetodoPago" MetodoPago
 Inscripcion o-> "Cliente" ApplicationUser
+Inscripcion o-> "ClasesInscritas<ClaseInscrita>" "IList`1"
 @enduml

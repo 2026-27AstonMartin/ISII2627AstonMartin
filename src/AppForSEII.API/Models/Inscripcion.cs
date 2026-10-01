@@ -29,6 +29,6 @@ public class Inscripcion
 
     public ApplicationUser Cliente { get; set; } = null!;
 
-    // Descomentar al crear la clase ClaseInscrita:
-    // public IList<ClaseInscrita> ClasesInscritas { get; set; } = new List<ClaseInscrita>();
+    
+     public IList<ClaseInscrita> ClasesInscritas { get; set; } = new List<ClaseInscrita>();
 }
