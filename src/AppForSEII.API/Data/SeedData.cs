@@ -56,6 +56,13 @@ namespace AppForSEII.API.Data {
             }
 
             try {
+                SeedAlquileres(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the Alquileres in the Database.");
+            }
+
+            try {
                 SeedInscripcionesCompeticion(dbContext);
             }
             catch (Exception ex) {
@@ -236,6 +243,33 @@ namespace AppForSEII.API.Data {
                 new Material { Nombre = "Raqueta de Tenis", Precio = 6.50m, Cantidad = 12, TipoMaterial = raqueta, TipoDeporte = tenis },
                 new Material { Nombre = "Balon de Baloncesto", Precio = 3.00m, Cantidad = 20, TipoMaterial = balon, TipoDeporte = baloncesto },
                 new Material { Nombre = "Juego de Petos", Precio = 4.25m, Cantidad = 8, TipoMaterial = equipacion, TipoDeporte = baloncesto });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void SeedAlquileres(ApplicationDbContext dbContext) {
+            if (dbContext.Alquileres.Any())
+                return;
+
+            dbContext.Alquileres.AddRange(
+                new Alquiler {
+                    NombreUsuario = "Lucia",
+                    ApellidosUsuario = "Martinez Gomez",
+                    DNI = "12345678Z",
+                    NumeroTelefono = "611223344",
+                    FechaAlquiler = new DateTime(2026, 10, 5),
+                    MetodoPago = MetodoPago.Bizum,
+                    PrecioTotal = 13.00m
+                },
+                new Alquiler {
+                    NombreUsuario = "Carlos",
+                    ApellidosUsuario = "Ruiz Fernandez",
+                    DNI = "87654321X",
+                    NumeroTelefono = "622334455",
+                    FechaAlquiler = new DateTime(2026, 10, 7),
+                    MetodoPago = MetodoPago.Efectivo,
+                    PrecioTotal = 10.75m
+                });
 
             dbContext.SaveChanges();
         }
