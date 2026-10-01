@@ -11,4 +11,5 @@
 !include .\\.\Models\Reserva.puml
 !include .\\.\Models\TipoDeporte.puml
 !include .\\.\Models\TipoMaterial.puml
+!include .\\.\Models\Alquiler.puml
 @enduml
