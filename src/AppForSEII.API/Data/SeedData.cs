@@ -20,13 +20,6 @@ namespace AppForSEII.API.Data {
             }
 
             try {
-                SeedCompeticiones(dbContext);
-            }
-            catch (Exception ex) {
-                logger.LogError(ex, "An error occurred seeding the Competiciones in the Database.");
-            }
-
-            try {
                 SeedPistas(dbContext);
             }
             catch (Exception ex) {
@@ -53,6 +46,14 @@ namespace AppForSEII.API.Data {
             }
             catch (Exception ex) {
                 logger.LogError(ex, "An error occurred seeding the Materiales in the Database.");
+            }
+
+            //las competiciones van despues de las pistas, que son las que crean sus tipos de deporte
+            try {
+                SeedCompeticiones(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the Competiciones in the Database.");
             }
 
             try {
@@ -105,27 +106,37 @@ namespace AppForSEII.API.Data {
             if (dbContext.Competiciones.Any())
                 return;
 
+            //the sport types must already exist (SeedPistas creates them) to be able to relate the competitions to them
+            var padel = dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == "Padel");
+            var tenis = dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == "Tenis");
+            var baloncesto = dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == "Baloncesto");
+            if (padel == null || tenis == null || baloncesto == null)
+                return;
+
             dbContext.Competiciones.AddRange(
                 new Competicion {
                     Nombre = "Torneo de Padel de Primavera",
                     Fecha = new DateTime(2027, 3, 14),
                     Plazas = 32,
                     Lugar = "Polideportivo Municipal",
-                    Precio = 25.00m
+                    Precio = 25.00m,
+                    TipoDeporte = padel
                 },
                 new Competicion {
                     Nombre = "Liga de Baloncesto 3x3",
                     Fecha = new DateTime(2027, 4, 22),
                     Plazas = 24,
                     Lugar = "Pabellon Central",
-                    Precio = 18.50m
+                    Precio = 18.50m,
+                    TipoDeporte = baloncesto
                 },
                 new Competicion {
                     Nombre = "Campeonato de Tenis Open",
                     Fecha = new DateTime(2027, 5, 9),
                     Plazas = 16,
                     Lugar = "Club de Tenis Aston",
-                    Precio = 40.00m
+                    Precio = 40.00m,
+                    TipoDeporte = tenis
                 });
 
             dbContext.SaveChanges();

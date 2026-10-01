@@ -11,4 +11,6 @@ public class TipoDeporte
 
     [StringLength(200, ErrorMessage = "La descripción no puede superar los 200 caracteres.")]
     public string? Descripcion { get; set; }
+
+    public IList<Competicion> Competiciones { get; set; } = new List<Competicion>();
 }
