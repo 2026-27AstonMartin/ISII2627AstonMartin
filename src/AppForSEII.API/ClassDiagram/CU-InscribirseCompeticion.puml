@@ -1,6 +1,6 @@
 @startuml
 hide methods
-!include Models/InscripcionCompeticion.puml
+!include Models/Inscripcion.puml
 !include Models/MetodoPago.puml
 !include Models/Competicion.puml
 !include Models/TipoDeporte.puml
