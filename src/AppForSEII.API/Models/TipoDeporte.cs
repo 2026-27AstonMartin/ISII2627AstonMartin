@@ -13,4 +13,6 @@ public class TipoDeporte
     public string? Descripcion { get; set; }
 
     public IList<Competicion> Competiciones { get; set; } = new List<Competicion>();
+    
+    public IList<Material> Materiales { get; set; } = new List<Material>();
 }

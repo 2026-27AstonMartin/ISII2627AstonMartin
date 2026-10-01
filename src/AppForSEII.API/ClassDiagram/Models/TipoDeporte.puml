@@ -7,4 +7,5 @@ class TipoDeporte {
 class "IList`1"<T> {
 }
 TipoDeporte o-> "Competiciones<Competicion>" "IList`1"
+TipoDeporte o-> "Materiales<Material>" "IList`1"
 @enduml
