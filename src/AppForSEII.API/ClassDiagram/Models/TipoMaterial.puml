@@ -3,4 +3,7 @@ class TipoMaterial {
     + IdTipoMaterial : int <<get>> <<set>>
     + NombreTipoMaterial : string <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
+TipoMaterial o-> "Materiales<Material>" "IList`1"
 @enduml
