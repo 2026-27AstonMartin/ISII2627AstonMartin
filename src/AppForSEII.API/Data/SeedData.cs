@@ -33,6 +33,21 @@ namespace AppForSEII.API.Data {
                 logger.LogError(ex, "An error occurred seeding the Pistas in the Database.");
             }
 
+            //las reservas van despues de las pistas, y las pistas reservadas despues de ambas
+            try {
+                SeedReservas(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the Reservas in the Database.");
+            }
+
+            try {
+                SeedPistasReservadas(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the PistasReservadas in the Database.");
+            }
+
             try {
                 SeedMateriales(dbContext);
             }
@@ -134,6 +149,68 @@ namespace AppForSEII.API.Data {
                     TipoDeporte = new TipoDeporte { Nombre = "Baloncesto" },
                     Precio = 55.00m,
                     Stock = 1
+                });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void SeedReservas(ApplicationDbContext dbContext) {
+            if (dbContext.Reservas.Any())
+                return;
+
+            dbContext.Reservas.AddRange(
+                new Reserva {
+                    NombreCliente = "Elena",
+                    Apellidos = "Navarro Martinez",
+                    Dni = "87654321B",
+                    FechaReserva = new DateTime(2026, 12, 18),
+                    MetodoPago = MetodoPago.Tarjeta,
+                    PrecioTotal = 44.00m
+                },
+                new Reserva {
+                    NombreCliente = "Peter",
+                    Apellidos = "Jackson",
+                    Dni = "12345678Z",
+                    FechaReserva = new DateTime(2026, 12, 19),
+                    MetodoPago = MetodoPago.Bizum,
+                    PrecioTotal = 55.00m
+                });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void SeedPistasReservadas(ApplicationDbContext dbContext) {
+            if (dbContext.PistasReservadas.Any())
+                return;
+
+            //both the courts and the bookings must already exist
+            var padel = dbContext.Pistas.FirstOrDefault(p => p.NombrePista == "Pista de Padel 1");
+            var tenis = dbContext.Pistas.FirstOrDefault(p => p.NombrePista == "Pista de Tenis 1");
+            var baloncesto = dbContext.Pistas.FirstOrDefault(p => p.NombrePista == "Pista Central de Baloncesto");
+            var reservas = dbContext.Reservas.OrderBy(r => r.Id).ToList();
+            if (padel == null || tenis == null || baloncesto == null || reservas.Count < 2)
+                return;
+
+            dbContext.PistasReservadas.AddRange(
+                new PistaReservada {
+                    IdPista = padel.IdPista,
+                    IdReserva = reservas[0].Id,
+                    Cantidad = 1,
+                    Precio = 20.00m,
+                    Observaciones = "Traeremos nuestras propias palas"
+                },
+                new PistaReservada {
+                    IdPista = tenis.IdPista,
+                    IdReserva = reservas[0].Id,
+                    Cantidad = 1,
+                    Precio = 24.00m
+                },
+                new PistaReservada {
+                    IdPista = baloncesto.IdPista,
+                    IdReserva = reservas[1].Id,
+                    Cantidad = 1,
+                    Precio = 55.00m,
+                    Observaciones = "Partido entre amigos"
                 });
 
             dbContext.SaveChanges();
