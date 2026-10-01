@@ -27,6 +27,7 @@ public class Inscripcion
     //el cliente aporta nombre, apellidos, DNI, correo-e y telefono
     public string ClienteId { get; set; } = string.Empty;
 
+    [ForeignKey("ClienteId")]
     public ApplicationUser Cliente { get; set; } = null!;
 
     
