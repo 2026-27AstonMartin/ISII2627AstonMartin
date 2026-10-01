@@ -7,6 +7,9 @@ class Alquiler {
     + NumeroTelefono : string <<get>> <<set>>
     + PrecioTotal : decimal <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
 Alquiler --> "FechaAlquiler" DateTime
 Alquiler --> "MetodoPago" MetodoPago
+Alquiler o-> "MaterialesAlquilados<MaterialAlquilado>" "IList`1"
 @enduml

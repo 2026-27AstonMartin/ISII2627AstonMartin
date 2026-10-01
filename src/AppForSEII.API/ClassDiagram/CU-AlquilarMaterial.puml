@@ -5,4 +5,5 @@ hide methods
 !include Models/TipoDeporte.puml
 !include Models/Alquiler.puml
 !include Models/MetodoPago.puml
+!include Models/MaterialAlquilado.puml
 @enduml
