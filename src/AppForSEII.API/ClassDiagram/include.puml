@@ -3,8 +3,8 @@
 !include .\\.\Models\ClaseDeportiva.puml
 !include .\\.\Models\ClaseInscrita.puml
 !include .\\.\Models\Competicion.puml
+!include .\\.\Models\CompeticionInscrita.puml
 !include .\\.\Models\Inscripcion.puml
-!include .\\.\Models\InscripcionCompeticion.puml
 !include .\\.\Models\Material.puml
 !include .\\.\Models\MetodoPago.puml
 !include .\\.\Models\Pista.puml

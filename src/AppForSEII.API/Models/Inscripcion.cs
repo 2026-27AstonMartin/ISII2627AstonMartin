@@ -31,4 +31,6 @@ public class Inscripcion
 
     
      public IList<ClaseInscrita> ClasesInscritas { get; set; } = new List<ClaseInscrita>();
+
+    public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
 }
