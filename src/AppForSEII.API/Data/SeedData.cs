@@ -220,11 +220,22 @@ namespace AppForSEII.API.Data {
             if (dbContext.Materiales.Any())
                 return;
 
+            //the sport types must already exist (SeedPistas creates them) to be able to relate the materials to them
+            var padel = dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == "Padel");
+            var tenis = dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == "Tenis");
+            var baloncesto = dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == "Baloncesto");
+            if (padel == null || tenis == null || baloncesto == null)
+                return;
+
+            var raqueta = new TipoMaterial { NombreTipoMaterial = "Raqueta" };
+            var balon = new TipoMaterial { NombreTipoMaterial = "Balon" };
+            var equipacion = new TipoMaterial { NombreTipoMaterial = "Equipacion" };
+
             dbContext.Materiales.AddRange(
-                new Material { Nombre = "Pala de Padel", Precio = 5.00m, Cantidad = 15 },
-                new Material { Nombre = "Raqueta de Tenis", Precio = 6.50m, Cantidad = 12 },
-                new Material { Nombre = "Balon de Baloncesto", Precio = 3.00m, Cantidad = 20 },
-                new Material { Nombre = "Juego de Petos", Precio = 4.25m, Cantidad = 8 });
+                new Material { Nombre = "Pala de Padel", Precio = 5.00m, Cantidad = 15, TipoMaterial = raqueta, TipoDeporte = padel },
+                new Material { Nombre = "Raqueta de Tenis", Precio = 6.50m, Cantidad = 12, TipoMaterial = raqueta, TipoDeporte = tenis },
+                new Material { Nombre = "Balon de Baloncesto", Precio = 3.00m, Cantidad = 20, TipoMaterial = balon, TipoDeporte = baloncesto },
+                new Material { Nombre = "Juego de Petos", Precio = 4.25m, Cantidad = 8, TipoMaterial = equipacion, TipoDeporte = baloncesto });
 
             dbContext.SaveChanges();
         }

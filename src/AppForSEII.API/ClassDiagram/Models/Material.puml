@@ -4,5 +4,9 @@ class Material {
     + Nombre : string <<get>> <<set>>
     + Precio : decimal <<get>> <<set>>
     + Cantidad : int <<get>> <<set>>
+    + TipoMaterialId : int <<get>> <<set>>
+    + TipoDeporteId : int <<get>> <<set>>
 }
+Material o-> "TipoMaterial" TipoMaterial
+Material o-> "TipoDeporte" TipoDeporte
 @enduml
