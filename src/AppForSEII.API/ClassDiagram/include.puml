@@ -13,4 +13,5 @@
 !include .\\.\Models\TipoDeporte.puml
 !include .\\.\Models\TipoMaterial.puml
 !include .\\.\Models\Alquiler.puml
+!include .\\.\Models\MaterialAlquilado.puml
 @enduml

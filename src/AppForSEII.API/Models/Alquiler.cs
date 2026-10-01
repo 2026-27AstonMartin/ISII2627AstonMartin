@@ -37,4 +37,6 @@ public class Alquiler
     [DataType(DataType.Currency)]
     [Precision(10, 2)]
     public decimal PrecioTotal { get; set; }
+
+    public IList<MaterialAlquilado> MaterialesAlquilados { get; set; } = new List<MaterialAlquilado>();
 }

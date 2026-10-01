@@ -31,4 +31,6 @@ public class Material
 
     [ForeignKey("TipoDeporteId")]
     public TipoDeporte TipoDeporte { get; set; } = null!;
+
+    public IList<MaterialAlquilado> MaterialesAlquilados { get; set; } = new List<MaterialAlquilado>();
 }

@@ -63,6 +63,14 @@ namespace AppForSEII.API.Data {
                 logger.LogError(ex, "An error occurred seeding the Alquileres in the Database.");
             }
 
+            //los materiales alquilados van despues de los materiales y de los alquileres
+            try {
+                SeedMaterialesAlquilados(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the MaterialesAlquilados in the Database.");
+            }
+
             //el orden importa: cada tabla necesita que esten sembradas aquellas a las que apunta
             try {
                 SeedTiposDeporte(dbContext);
@@ -273,6 +281,50 @@ namespace AppForSEII.API.Data {
                     FechaAlquiler = new DateTime(2026, 10, 7),
                     MetodoPago = MetodoPago.Efectivo,
                     PrecioTotal = 10.75m
+                });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void SeedMaterialesAlquilados(ApplicationDbContext dbContext) {
+            if (dbContext.MaterialesAlquilados.Any())
+                return;
+
+            //the materials and the rentals must already exist to be able to relate them
+            var pala = dbContext.Materiales.FirstOrDefault(m => m.Nombre == "Pala de Padel");
+            var raqueta = dbContext.Materiales.FirstOrDefault(m => m.Nombre == "Raqueta de Tenis");
+            var balon = dbContext.Materiales.FirstOrDefault(m => m.Nombre == "Balon de Baloncesto");
+            var petos = dbContext.Materiales.FirstOrDefault(m => m.Nombre == "Juego de Petos");
+            var alquileres = dbContext.Alquileres.OrderBy(a => a.IdAlquiler).ToList();
+            if (pala == null || raqueta == null || balon == null || petos == null || alquileres.Count < 2)
+                return;
+
+            dbContext.MaterialesAlquilados.AddRange(
+                new MaterialAlquilado {
+                    IdAlquiler = alquileres[0].IdAlquiler,
+                    IdMaterial = pala.IdMaterial,
+                    Cantidad = 2,
+                    Precio = pala.Precio,
+                    Descripcion = "Partido de padel con amigos"
+                },
+                new MaterialAlquilado {
+                    IdAlquiler = alquileres[0].IdAlquiler,
+                    IdMaterial = balon.IdMaterial,
+                    Cantidad = 1,
+                    Precio = balon.Precio
+                },
+                new MaterialAlquilado {
+                    IdAlquiler = alquileres[1].IdAlquiler,
+                    IdMaterial = raqueta.IdMaterial,
+                    Cantidad = 1,
+                    Precio = raqueta.Precio,
+                    Descripcion = "Clase particular de tenis"
+                },
+                new MaterialAlquilado {
+                    IdAlquiler = alquileres[1].IdAlquiler,
+                    IdMaterial = petos.IdMaterial,
+                    Cantidad = 1,
+                    Precio = petos.Precio
                 });
 
             dbContext.SaveChanges();

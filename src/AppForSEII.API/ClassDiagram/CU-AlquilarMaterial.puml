@@ -1,8 +1,16 @@
 @startuml
 hide methods
+remove DateTime
+remove IList*
 !include Models/Material.puml
 !include Models/TipoMaterial.puml
 !include Models/TipoDeporte.puml
 !include Models/Alquiler.puml
 !include Models/MetodoPago.puml
+!include Models/MaterialAlquilado.puml
+'las listas se dibujan como flechas directas, ya que se ocultan las cajas IList
+TipoDeporte o-> "*" Material : Materiales
+TipoMaterial o-> "*" Material : Materiales
+Material o-> "*" MaterialAlquilado : MaterialesAlquilados
+Alquiler o-> "*" MaterialAlquilado : MaterialesAlquilados
 @enduml

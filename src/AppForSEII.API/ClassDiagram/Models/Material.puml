@@ -7,6 +7,9 @@ class Material {
     + TipoMaterialId : int <<get>> <<set>>
     + TipoDeporteId : int <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
 Material o-> "TipoMaterial" TipoMaterial
 Material o-> "TipoDeporte" TipoDeporte
+Material o-> "MaterialesAlquilados<MaterialAlquilado>" "IList`1"
 @enduml
