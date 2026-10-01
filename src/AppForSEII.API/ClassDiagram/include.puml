@@ -7,5 +7,6 @@
 !include .\\.\Models\Material.puml
 !include .\\.\Models\MetodoPago.puml
 !include .\\.\Models\Pista.puml
+!include .\\.\Models\Reserva.puml
 !include .\\.\Models\TipoDeporte.puml
 @enduml

@@ -1,0 +1,11 @@
+@startuml
+class Reserva {
+    + Id : int <<get>> <<set>>
+    + NombreCliente : string <<get>> <<set>>
+    + Apellidos : string <<get>> <<set>>
+    + Dni : string <<get>> <<set>>
+    + PrecioTotal : decimal <<get>> <<set>>
+}
+Reserva --> "FechaReserva" DateTime
+Reserva --> "MetodoPago" MetodoPago
+@enduml
