@@ -4,4 +4,7 @@ class TipoDeporte {
     + Nombre : string <<get>> <<set>>
     + Descripcion : string? <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
+TipoDeporte o-> "Competiciones<Competicion>" "IList`1"
 @enduml
