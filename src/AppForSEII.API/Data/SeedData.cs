@@ -100,6 +100,13 @@ namespace AppForSEII.API.Data {
                 logger.LogError(ex, "An error occurred seeding the ClasesInscritas in the Database.");
             }
 
+            try {
+                SeedCompeticionesInscritas(dbContext);
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "An error occurred seeding the CompeticionesInscritas in the Database.");
+            }
+
         }
 
         public static void SeedCompeticiones(ApplicationDbContext dbContext) {
@@ -512,6 +519,30 @@ namespace AppForSEII.API.Data {
                     PlazasReservadas = 1,
                     Precio = 12.75m,
                     Observaciones = "Primera vez que juega al padel"
+                });
+
+            dbContext.SaveChanges();
+        }
+
+        public static void SeedCompeticionesInscritas(ApplicationDbContext dbContext) {
+            if (dbContext.CompeticionesInscritas.Any())
+                return;
+
+            //both the competitions and the inscriptions must already exist
+            var competiciones = dbContext.Competiciones.OrderBy(c => c.Id).ToList();
+            var inscripciones = dbContext.Inscripciones.OrderBy(i => i.Id).ToList();
+            if (competiciones.Count < 3 || inscripciones.Count < 2)
+                return;
+
+            dbContext.CompeticionesInscritas.AddRange(
+                new CompeticionInscrita {
+                    CompeticionId = competiciones[0].Id,
+                    InscripcionId = inscripciones[0].Id
+                },
+                new CompeticionInscrita {
+                    CompeticionId = competiciones[1].Id,
+                    InscripcionId = inscripciones[1].Id,
+                    ProblemasFisicos = "Molestia en el hombro derecho"
                 });
 
             dbContext.SaveChanges();
