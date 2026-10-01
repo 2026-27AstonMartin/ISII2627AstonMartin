@@ -1,0 +1,6 @@
+@startuml
+class TipoMaterial {
+    + IdTipoMaterial : int <<get>> <<set>>
+    + NombreTipoMaterial : string <<get>> <<set>>
+}
+@enduml
