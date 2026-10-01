@@ -83,27 +83,33 @@ namespace AppForSEII.API.Data {
             if (dbContext.Competiciones.Any())
                 return;
 
+            TipoDeporte ObtenerTipo(string nombre) =>
+                dbContext.TiposDeporte.FirstOrDefault(t => t.Nombre == nombre) ?? new TipoDeporte { Nombre = nombre };
+
             dbContext.Competiciones.AddRange(
                 new Competicion {
                     Nombre = "Torneo de Padel de Primavera",
                     Fecha = new DateTime(2027, 3, 14),
                     Plazas = 32,
                     Lugar = "Polideportivo Municipal",
-                    Precio = 25.00m
+                    Precio = 25.00m,
+                    TipoDeporte = ObtenerTipo("Padel")
                 },
                 new Competicion {
                     Nombre = "Liga de Baloncesto 3x3",
                     Fecha = new DateTime(2027, 4, 22),
                     Plazas = 24,
                     Lugar = "Pabellon Central",
-                    Precio = 18.50m
+                    Precio = 18.50m,
+                    TipoDeporte = ObtenerTipo("Baloncesto")
                 },
                 new Competicion {
                     Nombre = "Campeonato de Tenis Open",
                     Fecha = new DateTime(2027, 5, 9),
                     Plazas = 16,
                     Lugar = "Club de Tenis Aston",
-                    Precio = 40.00m
+                    Precio = 40.00m,
+                    TipoDeporte = ObtenerTipo("Tenis")
                 });
 
             dbContext.SaveChanges();

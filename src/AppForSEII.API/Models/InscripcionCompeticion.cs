@@ -37,6 +37,6 @@ public class InscripcionCompeticion
     [Precision(10, 2)]
     public decimal PrecioTotal { get; set; }
 
-    // Descomentar cuando exista la clase CompeticionInscrita:
-    // public IList<CompeticionInscrita> CompeticionesInscritas { get; set; }
+    
+    public IList<CompeticionInscrita> CompeticionesInscritas { get; set; } = new List<CompeticionInscrita>();
 }
