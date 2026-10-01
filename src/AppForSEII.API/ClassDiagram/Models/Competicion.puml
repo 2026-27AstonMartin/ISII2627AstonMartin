@@ -5,6 +5,8 @@ class Competicion {
     + Plazas : int <<get>> <<set>>
     + Lugar : string <<get>> <<set>>
     + Precio : decimal <<get>> <<set>>
+    + TipoDeporteId : int <<get>> <<set>>
 }
 Competicion --> "Fecha" DateTime
+Competicion o-> "TipoDeporte" TipoDeporte
 @enduml
