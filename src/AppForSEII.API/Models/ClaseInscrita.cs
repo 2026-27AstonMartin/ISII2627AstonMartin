@@ -21,9 +21,11 @@ public class ClaseInscrita
 
     public int ClaseDeportivaId { get; set; }
 
+    [ForeignKey("ClaseDeportivaId")]
     public ClaseDeportiva ClaseDeportiva { get; set; } = null!;
 
     public int InscripcionId { get; set; }
 
+    [ForeignKey("InscripcionId")]
     public Inscripcion Inscripcion { get; set; } = null!;
 }
