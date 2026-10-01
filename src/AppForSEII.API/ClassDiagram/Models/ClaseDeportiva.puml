@@ -9,6 +9,9 @@ class ClaseDeportiva {
     + PrecioUnitario : decimal <<get>> <<set>>
     + TipoDeporteId : int <<get>> <<set>>
 }
+class "IList`1"<T> {
+}
 ClaseDeportiva --> "FechaHora" DateTime
 ClaseDeportiva o-> "TipoDeporte" TipoDeporte
+ClaseDeportiva o-> "ClasesInscritas<ClaseInscrita>" "IList`1"
 @enduml
