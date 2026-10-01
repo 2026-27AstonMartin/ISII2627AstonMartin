@@ -33,5 +33,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     public DbSet<ClaseInscrita> ClasesInscritas { get; set; }
 
+    public DbSet<Reserva> Reservas { get; set; }
 
 }

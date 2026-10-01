@@ -1,4 +1,6 @@
 @startuml
 hide methods
 !include Pista.puml
+!include Models/Reserva.puml
+!include Models/MetodoPago.puml
 @enduml
