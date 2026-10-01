@@ -3,4 +3,6 @@ hide methods
 !include Pista.puml
 !include Models/Reserva.puml
 !include Models/MetodoPago.puml
+!include Models/PistaReservada.puml
+!include Models/TipoDeporte.puml
 @enduml

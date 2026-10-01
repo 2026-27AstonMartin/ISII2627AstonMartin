@@ -23,4 +23,6 @@ public class Reserva
     [Required]
     [Column(TypeName = "decimal(10,2)")]
     public decimal PrecioTotal { get; set; }
+
+    public IList<PistaReservada> PistasReservadas { get; set; } = new List<PistaReservada>();
 }

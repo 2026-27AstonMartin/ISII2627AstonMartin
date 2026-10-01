@@ -22,4 +22,6 @@ public class Pista
 
     [ForeignKey("TipoDeporteId")]
     public TipoDeporte TipoDeporte { get; set; } = null!;
+
+    public IList<PistaReservada> PistasReservadas { get; set; } = new List<PistaReservada>();
 }
